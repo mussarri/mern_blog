@@ -12,6 +12,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("");
 
+  console.log(errors);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors("");
@@ -24,12 +26,12 @@ function Login() {
         if (res.status === 200) {
           alert(`User logined succesfully`);
           setUser({ username: `${res.data.isUser.username}` });
-          navigate('/')
+          navigate("/");
         }
       })
       .catch((err) => {
+        console.log(err);
         if (err.response) {
-          console.log(err);
           if (err.response.status === 401) setErrors("Invalid credentials");
           else setErrors("Please try again.");
         }

@@ -12,6 +12,10 @@ function Blog() {
         <Link to={"blogs/id"}>
           <h2 className="fw-blod">Free photo of peyzaj alan hayvan tarim</h2>
         </Link>
+        <div className="my-2">
+          <span className="fw-bold">Yazar </span>
+          <span>23.03.2022</span>
+        </div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
-import { confirmAlert } from "react-confirm-alert"; 
+import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-
 import { UserContext } from "../App";
+
 import axios from "axios";
 
 export const instance = axios.create({
@@ -23,7 +23,7 @@ function Layout() {
           if (response.status === 200) {
             setUser({ username: response.data.decoded.username });
           } else {
-            console.log(response);
+            console.log("response.status is not 200");
           }
         })
         .catch(function (error) {
@@ -31,7 +31,7 @@ function Layout() {
         });
     }
     refresh();
-  }, []);
+  }, [setUser]);
 
   const logoutHandler = (e) => {
     instance.get("/logout").then((res) => {
@@ -78,9 +78,14 @@ function Layout() {
               </Link>
             </div>
           ) : (
-            <Link className="navbar-brand" onClick={logout}>
-              Logout
-            </Link>
+            <div className="header-right fs-6">
+              <Link className="navbar-brand" to="/create">
+                Create Post
+              </Link>
+              <Link className="navbar-brand" onClick={logout}>
+                Logout
+              </Link>
+            </div>
           )}
         </nav>
       </header>

@@ -7,11 +7,11 @@ import BlogPage from "./pages/BlogPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NoPage from "./pages/NoPage";
+import CreatePost from "./pages/Create";
 
 export const UserContext = createContext();
 
 function App() {
-  
   const [user, setUser] = useState({});
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -20,8 +20,16 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="blogs" element={<BlogPage />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
+
+            {user.username ? (
+              <Route path="create" element={<CreatePost />} />
+            ) : (
+              <>
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+              </>
+            )}
+
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

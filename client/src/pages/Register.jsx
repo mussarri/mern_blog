@@ -10,7 +10,7 @@ function Register() {
   const navigate = useNavigate();
   async function registerPost(e) {
     e.preventDefault();
-    const res = await instance.post("http://localhost:4000/register", {
+    const res = await instance.post("/register", {
       username,
       password,
       email,
