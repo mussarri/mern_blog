@@ -106,11 +106,14 @@ section {
   justify-items: center;
   gap: 15px;
   margin-bottom: 20px;
+  max-height: 300px;
+  overflow: hidden;
 }
 
 .post > *:first-child {
   width: 30%;
   padding: 5px;
+  object-fit: contain;
 }
 
 .post > *:nth-child(2) {

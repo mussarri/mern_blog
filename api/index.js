@@ -3,13 +3,24 @@ import cors from "cors";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import multer from "multer";
-import Post from "./models/post.js";
+import path from 'path';
+import { fileURLToPath } from 'url';
+import slugify from "slugify";
+
+console.log(slugify("New Post 1"));
+
+
+import { createPost, getAllPost } from "./controller/postController.js";
 import {
   loginController,
   refreshController,
   registerController,
   logoutController,
 } from "./controller/authController.js";
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
 
 // image upload
 var storage = multer.diskStorage({
@@ -39,6 +50,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+app.use("/upload", express.static(__dirname + "/upload"))
 
 app.post("/register", registerController);
 
@@ -48,22 +60,9 @@ app.get("/refresh", refreshController);
 
 app.get("/logout", logoutController);
 
-app.post("/create", upload.single("image"), async (req, res) => {
-  const data = req.body;
+app.post("/create", upload.single("image"), createPost);
 
-  const file = req.file?.filename;
-  //save db and if success send true or send false
-  try {
-    const newpost = await Post.create({
-      data,
-      image: file,
-    });
-    res.json(newpost);
-  } catch (error) {
-    console.log(error);
-    res.status(400).json(error);
-  }
-});
+app.get("/posts", getAllPost)
 
 app.listen(4000, () => {
   console.log(`app listening on port ${4000}`);

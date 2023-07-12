@@ -11,7 +11,9 @@ function Home() {
   useEffect(() => {
     instance
       .get("/posts")
-      .then((res) => console.log(res))
+      .then((res) => {
+        setPosts(res.data.posts);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -21,8 +23,7 @@ function Home() {
       <h4>{user.username && user.username}</h4>
       <section className="posts">
         <h3 className="m-1">Last Blogs</h3>
-        <Blog />
-        <Blog />
+        {posts.length < 0 ? "No post" : posts.map((post, i) => <Blog post={post} />)}
       </section>
     </>
   );

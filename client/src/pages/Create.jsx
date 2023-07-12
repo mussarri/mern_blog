@@ -27,13 +27,18 @@ function Create() {
       .then((res) => {
         setErrors({});
         if (res.status === 200) {
-          alert("Form created successfully");
+          alert("Post created successfully");
         } else {
           console.log(res);
         }
       })
       .catch((err) => {
-        setErrors(err.response.data.errors);
+        if (err.response.data.code === 11000) {
+          setErrors({ message: "Duplicate key error" });
+        } else {
+          console.log(err.message);
+          setErrors(err.response.data.errors);
+        }
       });
   }
 
@@ -44,6 +49,11 @@ function Create() {
 
   return (
     <>
+      {errors.message ? (
+        <div className="alert alert-danger col-lg-6">{errors.message}</div>
+      ) : (
+        ""
+      )}
       <form className="col-lg-6">
         <h3>Create New Post</h3>
         <div className="mb-3">
