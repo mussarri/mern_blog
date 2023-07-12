@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NoPage from "./pages/NoPage";
 import CreatePost from "./pages/Create";
+import SinglePost from "./pages/SinglePost";
 
 export const UserContext = createContext();
 
@@ -22,7 +23,10 @@ function App() {
             <Route path="blogs" element={<BlogPage />} />
 
             {user.username ? (
-              <Route path="create" element={<CreatePost />} />
+              <>
+                <Route path="create" element={<CreatePost />} />
+                <Route path="posts/:slug" element={<SinglePost />} />
+              </>
             ) : (
               <>
                 <Route path="login" element={<Login />} />

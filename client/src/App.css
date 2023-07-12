@@ -129,3 +129,12 @@ section {
 small{
   color: red;
 }
+
+.single-post .img{
+  overflow: hidden;
+}
+
+.single-post .img img{
+  aspect-ratio:4/3;
+  width: 100%;
+}

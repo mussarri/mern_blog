@@ -10,6 +10,19 @@ export const getAllPost = async (req, res) => {
   }
 };
 
+export const getSinglePost = async (req, res) => {
+  console.log(req);
+  try {
+    const { slug } = req.params;
+    console.log(slug);
+    const post = await Post.findOne({ slug });
+    res.status(200).json({ post });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+};
+
 export const createPost = async (req, res) => {
   const data = req.body;
   console.log(data);
@@ -19,7 +32,7 @@ export const createPost = async (req, res) => {
   try {
     const newpost = await Post.create({
       ...data,
-      image: file || '',
+      image: file || "",
     });
     res.json(newpost);
   } catch (error) {

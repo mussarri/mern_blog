@@ -17,6 +17,10 @@ const PostSchema = new Schema({
   image: {
     type: String,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Post = model("Post", PostSchema);

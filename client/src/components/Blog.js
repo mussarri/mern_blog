@@ -6,17 +6,15 @@ function Blog({ post }) {
     <div className="post">
       <img src={"http://localhost:4000/upload/" + post.image} alt="" />
       <div>
-        <Link to={"blogs/id"}>
+        <Link to={"posts/" + post.slug}>
           <h3 className="fw-blod">{post.title}</h3>
         </Link>
         <div className="my-2">
           <span className="fw-bold">Yazar </span>
           <span>23.03.2022</span>
         </div>
-        <p>
-          {post.summary}
-        </p>
-        <Link to={"blogs/id"} className="float-r">
+        <p>{post.summary}</p>
+        <Link to={"posts/" + post.slug} className="float-r">
           Read more...
         </Link>
       </div>

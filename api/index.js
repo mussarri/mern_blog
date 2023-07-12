@@ -10,7 +10,7 @@ import slugify from "slugify";
 console.log(slugify("New Post 1"));
 
 
-import { createPost, getAllPost } from "./controller/postController.js";
+import { createPost, getAllPost, getSinglePost } from "./controller/postController.js";
 import {
   loginController,
   refreshController,
@@ -51,6 +51,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/upload", express.static(__dirname + "/upload"))
+app.use("/posts", express.static(__dirname + "/upload"))
 
 app.post("/register", registerController);
 
@@ -63,6 +64,8 @@ app.get("/logout", logoutController);
 app.post("/create", upload.single("image"), createPost);
 
 app.get("/posts", getAllPost)
+
+app.get("/posts/:slug", getSinglePost)
 
 app.listen(4000, () => {
   console.log(`app listening on port ${4000}`);
