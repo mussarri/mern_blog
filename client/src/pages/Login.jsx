@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { instance } from "../components/Layout";
 
 import { UserContext } from "../App";
 
 function Login() {
   const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -13,17 +15,17 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors("");
-    axios
-      .post(
-        "http://localhost:4000/login",
-        {
-          username,
-          password,
-        },
-        { withCredentials: true }
-      )
+    instance
+      .post("/login", {
+        username,
+        password,
+      })
       .then((res) => {
-        setUser({ auth: true, username: "ali" });
+        if (res.status === 200) {
+          alert(`User logined succesfully`);
+          setUser({ username: `${res.data.isUser.username}` });
+          navigate('/')
+        }
       })
       .catch((err) => {
         if (err.response) {

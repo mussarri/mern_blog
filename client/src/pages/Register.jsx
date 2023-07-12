@@ -1,24 +1,26 @@
 import React, { useState } from "react";
+import { instance } from "../components/Layout";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
   async function registerPost(e) {
     e.preventDefault();
-    const response = await fetch("http://localhost:4000/register", {
-      method: "POST",
-      body: JSON.stringify({ username, password, email }),
-      headers: {
-        "Content-Type": "Application/json",
-      },
+    const res = await instance.post("http://localhost:4000/register", {
+      username,
+      password,
+      email,
     });
-    const result = await response.json();
-    if (response.ok) {
-      alert(`${username} registered succesfully`);
+    console.log(res);
+    if (res.status === 200) {
+      alert(`${res.data.username} registered succesfully`);
+      navigate("/login");
     } else {
-      setErrors(result.errors);
+      setErrors(res.errors);
     }
   }
 
