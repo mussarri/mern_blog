@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 function Blog() {
   return (
-    <div class="post">
+    <div className="post">
       <img
         src="https://images.pexels.com/photos/17018324/pexels-photo-17018324/free-photo-of-peyzaj-alan-hayvan-tarim.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         alt=""
       />
       <div>
         <Link to={"blogs/id"}>
-          <h2 class="fw-blod">Free photo of peyzaj alan hayvan tarim</h2>
+          <h2 className="fw-blod">Free photo of peyzaj alan hayvan tarim</h2>
         </Link>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

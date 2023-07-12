@@ -34,7 +34,7 @@ function Register() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <small>{errors.username ? errors.username.message : ""}</small>
+          <small>{errors?.username ? errors.username.message : ""}</small>
         </div>
         <div className="mb-3">
           <label className="form-label">Email address</label>
@@ -44,7 +44,7 @@ function Register() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <small>{errors.email ? errors.email.message : ""}</small>
+          <small>{errors?.email ? errors.email.message : ""}</small>
         </div>
         <div className="mb-3">
           <label className="form-label">Password</label>
@@ -54,7 +54,7 @@ function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <small>{errors.password ? errors.password.message : ""}</small>
+          <small>{errors?.password ? errors.password.message : ""}</small>
         </div>
 
         <button
