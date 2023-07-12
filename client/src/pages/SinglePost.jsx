@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { instance } from "../components/Layout";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate, Link } from "react-router-dom";
 
 function SinglePost() {
   const [post, setPost] = useState({});
   const [error, setError] = useState();
   const { slug } = useParams();
+
+  console.log(error);
 
   useEffect(() => {
     instance
@@ -27,8 +29,12 @@ function SinglePost() {
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
         <div className="text-right float-r">
-          <button className="btn btn-warning me-3">Edit</button>
-          <button className="btn btn-danger">Delete</button>
+          <Link to={"/edit/" + post.slug}>
+            <button className="btn btn-warning me-3">Edit</button>
+          </Link>
+          <Link to={"/delete/" + post.slug}>
+            <button className="btn btn-danger">Delete</button>
+          </Link>
         </div>
       </div>
     );

@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import NoPage from "./pages/NoPage";
 import CreatePost from "./pages/Create";
 import SinglePost from "./pages/SinglePost";
+import EditPage from "./pages/EditPage";
 
 export const UserContext = createContext();
 
@@ -26,6 +27,7 @@ function App() {
               <>
                 <Route path="create" element={<CreatePost />} />
                 <Route path="posts/:slug" element={<SinglePost />} />
+                <Route path="edit/:slug" element={<EditPage />} />
               </>
             ) : (
               <>

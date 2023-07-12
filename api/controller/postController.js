@@ -23,6 +23,23 @@ export const getSinglePost = async (req, res) => {
   }
 };
 
+export const updatePost = async (req, res) => {
+  console.log(req);
+  try {
+    const { slug } = req.params;
+    console.log(slug);
+    const data = req.body
+    const post = await Post.findOneAndUpdate({ slug }, {
+      ...data,
+
+    });
+    res.status(200).json({ post });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+};
+
 export const createPost = async (req, res) => {
   const data = req.body;
   console.log(data);
