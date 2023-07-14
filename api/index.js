@@ -43,7 +43,7 @@ var upload = multer({ storage: storage });
 
 const app = express();
 
-mongoose.connect("mongodb+srv://msaricicek99:4MiG5KyK9dhIrrdg@cluster0.gyuydbk.mongodb.net/blog", {
+mongoose.connect("", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
