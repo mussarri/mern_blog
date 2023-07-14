@@ -25,8 +25,8 @@ function Create() {
     instance
       .post("/create", formData)
       .then((res) => {
-        setErrors({});
         if (res.status === 200) {
+          setErrors({});
           alert("Post created successfully");
         } else {
           console.log(res);
@@ -36,7 +36,7 @@ function Create() {
         if (err.response.data.code === 11000) {
           setErrors({ message: "Duplicate key error" });
         } else {
-          console.log(err.message);
+          console.log(err.message, "error");
           setErrors(err.response.data.errors);
         }
       });
@@ -49,7 +49,7 @@ function Create() {
 
   return (
     <>
-      {errors.message ? (
+      {errors?.message ? (
         <div className="alert alert-danger col-lg-6">{errors.message}</div>
       ) : (
         ""
@@ -65,7 +65,7 @@ function Create() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          {errors.title ? <small>{errors.title.message}</small> : ""}
+          {errors?.title ? <small>{errors.title.message}</small> : ""}
         </div>
         <div className="mb-3">
           <label className="form-label">Summary</label>
@@ -76,7 +76,7 @@ function Create() {
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
           />
-          {errors.summary ? <small>{errors.summary.message}</small> : ""}
+          {errors?.summary ? <small>{errors.summary.message}</small> : ""}
         </div>
         <div className="mb-3">
           <input
@@ -85,14 +85,14 @@ function Create() {
             name="image"
             onChange={(e) => setImage(e.target.files[0])}
           />
-          {errors.image ? <small>{errors.image.message}</small> : ""}
+          {errors?.image ? <small>{errors.image.message}</small> : ""}
         </div>
         <div className="mb-3">
           <ReactQuill
             value={content}
             onChange={(newValue) => setContent(newValue)}
           />
-          {errors.content ? <small>{errors.content.message}</small> : ""}
+          {errors?.content ? <small>{errors.content.message}</small> : ""}
         </div>
         <button
           onClick={createPostHandler}

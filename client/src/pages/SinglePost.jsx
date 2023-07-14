@@ -19,12 +19,13 @@ function SinglePost() {
   if (post) {
     return (
       <div className="single-post col-lg-8 m-auto mt-4">
-        <div className="img">
+        <h2 className="mt-3 text-center fw-bold">
+          {post.title}
+        </h2>
+        <div className="img mt-3">
           <img src={"http://localhost:4000/upload/" + post.image} alt="" />
         </div>
-        <h3 className="mt-3">
-          <p>{post.title}</p>
-        </h3>
+
         <div className="mt-3">
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>

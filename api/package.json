@@ -14,7 +14,7 @@
   "name": "mern_blog",
   "description": "",
   "version": "1.0.0",
-  "main": "./api/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "",
     "start": "nodemon"

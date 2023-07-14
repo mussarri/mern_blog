@@ -3,14 +3,18 @@ import cors from "cors";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import multer from "multer";
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 import slugify from "slugify";
 
 console.log(slugify("New Post 1"));
 
-
-import { createPost, getAllPost, getSinglePost } from "./controller/postController.js";
+import {
+  createPost,
+  getAllPost,
+  getSinglePost,
+  updatePost,
+} from "./controller/postController.js";
 import {
   loginController,
   refreshController,
@@ -20,12 +24,15 @@ import {
 
 const __filename = fileURLToPath(import.meta.url);
 
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
+
+
+
 
 // image upload
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./api/upload/");
+    cb(null, "./upload/");
   },
   filename: (req, file, cb) => {
     cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
@@ -36,7 +43,7 @@ var upload = multer({ storage: storage });
 
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/blog", {
+mongoose.connect("mongodb+srv://msaricicek99:4MiG5KyK9dhIrrdg@cluster0.gyuydbk.mongodb.net/blog", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -50,8 +57,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-app.use("/upload", express.static(__dirname + "/upload"))
-app.use("/posts", express.static(__dirname + "/upload"))
+app.use("/upload", express.static(__dirname + "/upload"));
+app.use("/posts", express.static(__dirname + "/upload"));
 
 app.post("/register", registerController);
 
@@ -63,9 +70,11 @@ app.get("/logout", logoutController);
 
 app.post("/create", upload.single("image"), createPost);
 
-app.get("/posts", getAllPost)
+app.get("/posts", getAllPost);
 
-app.get("/posts/:slug", getSinglePost)
+app.get("/posts/:slug", getSinglePost);
+
+app.patch("/edit/:slug", updatePost);
 
 app.listen(4000, () => {
   console.log(`app listening on port ${4000}`);
