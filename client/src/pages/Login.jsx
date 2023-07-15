@@ -1,11 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { instance } from "../components/Layout";
 
-import { UserContext } from "../App";
 
 function Login() {
-  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -25,7 +23,7 @@ function Login() {
       .then((res) => {
         if (res.status === 200) {
           alert(`User logined succesfully`);
-          setUser({ username: `${res.data.isUser.username}` });
+          // setUser({ username: `${res.data.isUser.username}` });
           navigate("/");
         }
       })

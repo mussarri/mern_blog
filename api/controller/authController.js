@@ -1,13 +1,14 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
+import "dotenv/config";
 
 const salt = bcrypt.genSaltSync(10);
-const secretAccess =
-  "1CA8503EB02B6B1D3B974CBB79E513D8A75C1A0F4F7AB3605C705A83D0CFDE09";
 
-const secretRefresh =
-  "eyJhbGciOiJIUzI1NiJ9IekTJ3jdWOSXqA6LyXbT_xhXM8O_U7vsMTZ7k9J9l4I";
+const secretAccess = process.env.SECRET_ACTIVE;
+
+const secretRefresh = process.env.SECRET_REFRESH;
+
 
 export const registerController = async (req, res) => {
   const { username, password, email } = req.body;

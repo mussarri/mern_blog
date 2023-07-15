@@ -6,6 +6,7 @@ import multer from "multer";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import slugify from "slugify";
+import 'dotenv/config'
 
 console.log(slugify("New Post 1"));
 
@@ -43,11 +44,12 @@ var upload = multer({ storage: storage });
 
 const app = express();
 
-mongoose.connect("", {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 mongoose.connection.on("open", () => console.log("Connected to db"));
+
 
 const corsOptions = {
   origin: "http://localhost:3000", // Adjust the origin to match your frontend URL
